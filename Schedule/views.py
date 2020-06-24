@@ -1,4 +1,8 @@
-from django.http import HttpResponse
+from django.shortcuts import render
+from django.views.generic import TemplateView
 
-def index(request):
-    return HttpResponse("Hello")
+class Index(TemplateView):
+    index_template = "Index.html"
+
+    def get(self, request):
+        return render(request, self.index_template, {})

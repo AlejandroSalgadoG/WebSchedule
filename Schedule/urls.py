@@ -1,6 +1,6 @@
 from django.urls import path
-from Schedule.views import index
+from Schedule.views import Index
 
 urlpatterns = [
-    path('', index)
+    path('', Index.as_view())
 ]
