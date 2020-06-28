@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <h1>Crear Misa</h1>
+
+        <form action="/create_mass" method=post>
+            <input type="hidden" name="temple" value="{{temple}}"/>
+            <label>Horario:</label> <input type="datetime-local" name="schedule" required> <br>
+            <label>Maximo de participantes:</label> <input type="text" name="max_participants" required> <br>
+            <input type="submit" value="Crear">
+        </form> 
+    </body>
+</html> 

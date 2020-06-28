@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <h1>Misas del templo {{temple.name}}</h1>
+
+        <ol>
+            {% for mass in masses %}
+                <li>
+                    <a href="/register?temple={{temple.pk}}&mass={{mass.pk}}">{{mass.schedule}}</a>
+                </li>
+            {% endfor %}
+        </ol>
+    </body>
+</html> 

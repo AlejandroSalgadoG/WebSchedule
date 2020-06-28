@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <h1>Bienvenido a {{temple.name}}</h1>
+
+        <ol>
+            {% for mass in masses %}
+                <li>
+                    <a href="/consult_mass?mass={{mass.pk}}">{{mass.schedule}}</a>
+                </li>
+            {% endfor %}
+        </ol>
+
+        <button onclick="location.href='create_mass?temple={{temple.pk}}';">Crear Misa</button>
+        <button onclick="location.href='logout';">Salir</button>
+    </body>
+</html> 

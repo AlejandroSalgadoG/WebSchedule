@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <h1>Misa {{mass.schedule}}</h1>
+
+        <ol>
+            {% for reservation in reservations %}
+                <li>
+                    {{reservation.participant.name}} - {{reservation.participant.id_num}}
+                </li>
+            {% endfor %}
+        </ol>
+
+    </body>
+</html> 

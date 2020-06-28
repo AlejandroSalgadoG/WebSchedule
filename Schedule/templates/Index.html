@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>TomApp</title>
-    </head>
-
     <body>
-        <header>
-            <h1>Bienvenido</h1>
-        </header>
+        <h1>Bienvenido</h1>
+
+        <ol>
+            {% for temple in temples %}
+                <li>
+                    <a href="/select_mass?temple={{temple.pk}}">{{temple.name}}</a>
+                </li>
+            {% endfor %}
+        </ol>
+
+        <button onclick="location.href='login';">Ingresar</button>
     </body>
-</html>
+</html> 

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <h1>Registrarse a la misa {{mass.schedule}} de la parroquia {{temple.pk}}</h1>
+
+        <form action="/register" method=post>
+            <input type="hidden" name="mass" value="{{mass.pk}}"/>
+            <label>Cedula:</label> <input type="text" name="id_num" required> <br>
+            <label>Nombre completo:</label> <input type="text" name="name" required> <br>
+            <label>Edad:</label> <input type="text" name="age" required> <br>
+            <label>Direccion:</label> <input type="text" name="address" required> <br>
+            <label>Telefono:</label> <input type="text" name="phone" required> <br>
+            <input type="submit" value="Registrar">
+        </form> 
+
+    </body>
+</html> 
