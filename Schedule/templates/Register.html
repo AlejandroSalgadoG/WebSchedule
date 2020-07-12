@@ -1,11 +1,30 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <style>
+            * { box-sizing: border-box; }
+
+            header { text-align: center; }
+
+            form { text-align:center; width: 100%; }
+            label, input { display: inline-block; }
+            label { width: 30%; text-align: right; }
+            label + input { width: 30%; margin: 0 30% 0 1%; }
+
+            input { width: 50%; padding: 6px 6px; margin: 2px 0; border: 3px solid #ccc; transition: 0.5s; }
+            input:focus { border: 3px solid #555; }
+
+        </style>
+    </head>
     <body>
-        <h1>Registrarse a la misa {{mass.schedule}} de la parroquia {{temple.pk}}</h1>
+        <header>
+            <h1>Registro</h1>
+            <p>{{temple.name}} - {{mass.get_formatted_schedule}}</p>
+        </header>
 
         <form action="/register" method=post>
             <input type="hidden" name="mass" value="{{mass.pk}}"/>
-            <label>Cedula:</label> <input type="text" name="id_num" required> <br>
+            <label class="name_col">Cedula:</label> <input class="input_col" type="text" name="id_num" required> <br>
             <label>Nombre completo:</label> <input type="text" name="name" required> <br>
             <label>Edad:</label> <input type="text" name="age" required> <br>
             <label>Direccion:</label> <input type="text" name="address" required> <br>

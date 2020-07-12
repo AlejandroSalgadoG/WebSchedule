@@ -13,6 +13,12 @@ class Mass(models.Model):
     schedule = models.DateTimeField()
     max_participants = models.IntegerField()
 
+    def get_formatted_schedule(self):
+        return self.schedule.strftime("%d/%m - %I:%M %p")
+
+    def get_space_available(self):
+        return "%d/%d" % (len( self.reservation_set.all() ), self.max_participants)
+
 class Participant(models.Model):
     id_num = models.IntegerField()
     name = models.CharField(max_length = 128)

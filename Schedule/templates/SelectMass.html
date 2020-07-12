@@ -1,14 +1,59 @@
 <!DOCTYPE html>
 <html>
-    <body>
-        <h1>Misas del templo {{temple.name}}</h1>
+    <head>
+        <style>
+            * { box-sizing: border-box; }
 
-        <ol>
-            {% for mass in masses %}
-                <li>
-                    <a href="/register?temple={{temple.pk}}&mass={{mass.pk}}">{{mass.schedule}}</a>
-                </li>
-            {% endfor %}
-        </ol>
+            header { text-align: center; }
+
+            nav ul { list-style-type: none; margin: 0; padding: 0; overflow: hidden; background-color: #333; }
+            nav li { float: left; }
+            nav li a { display: block; color: white; text-align: center; padding: 14px 16px; text-decoration: none; font-weight: bold; }
+            nav li a:hover { background-color: #111; }
+
+            .left_col {float: left; width: 80%; }
+            .right_col {float: right; width: 20%;}
+
+            .title { text-align: center; overflow: hidden; padding: 20px;}
+            .title a { font-weight: bold; font-size: 20px; }
+
+            .content ul { list-style-type: none; margin: 0; padding: 0 0; overflow: hidden; }
+            .content li {  text-align: center;   overflow: hidden;}
+            .content li:nth-child(odd) { background-color: #777; }
+            .content li:nth-child(even) { background-color: #555; }
+            .content li a { display: block; color: white;  padding: 14px 16px; text-decoration: none; font-weight: bold; font-size: 20px;}
+
+        </style>
+    </head>
+
+    <body>
+        <header>
+            <h1>Parroquia {{temple.name}}</h1>
+        </header>
+
+        <nav>
+            <ul>
+                {% for temple in temples %}
+                    <li>
+                        <a href="/select_mass?temple={{temple.pk}}">{{temple.name}}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </nav>
+
+        <div class="title">
+            <a class="left_col"> Fecha y hora </a> <a class="right_col">Cupos reservados</a>
+        </div>
+
+        <div class="content">
+            <ul>
+                {% for mass in masses %}
+                    <li>
+                        <a class="left_col" href="/register?temple={{temple.pk}}&mass={{mass.pk}}"> {{mass.get_formatted_schedule}} </a>
+                        <a class="right_col">{{mass.get_space_available}}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
     </body>
 </html> 

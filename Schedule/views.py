@@ -67,15 +67,16 @@ class SelectMass(TemplateView):
     template = "SelectMass.html"
 
     def get(self, request):
-        temple = models.Temple.objects.get(pk=request.GET["temple"])
+        temples = models.Temple.objects.all()
+        temple = temples.get(pk=request.GET["temple"])
         masses = temple.mass_set.all()
-        return render(request, self.template, {"temple": temple, "masses": masses})
+        return render(request, self.template, {"temple": temple, "temples": temples, "masses": masses})
 
 class Register(TemplateView):
     template = "Register.html"
 
     def get(self, request):
-        temple = models.Mass.objects.get(pk=request.GET["temple"])
+        temple = models.Temple.objects.get(pk=request.GET["temple"])
         mass = models.Mass.objects.get(pk=request.GET["mass"])
         return render(request, self.template, {"temple": temple, "mass": mass})
 
