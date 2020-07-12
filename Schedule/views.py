@@ -59,9 +59,10 @@ class ConsultMass(TemplateView):
     template = "ConsultMass.html"
 
     def get(self, request):
+        temple = models.Temple.objects.get(pk=request.GET["temple"])
         mass = models.Mass.objects.get(pk=request.GET["mass"])
         reservations = mass.reservation_set.all()
-        return render(request, self.template, {"mass": mass, "reservations": reservations})
+        return render(request, self.template, {"temple": temple, "mass": mass, "reservations": reservations})
 
 class SelectMass(TemplateView):
     template = "SelectMass.html"

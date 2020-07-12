@@ -1,15 +1,43 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <style>
+            * { box-sizing: border-box; }
+
+            header { text-align: center; }
+
+            .left_col {float: left; width: 50%; }
+            .right_col {float: right; width: 50%;}
+
+            .title { text-align: center; overflow: hidden; padding: 20px;}
+            .title a { font-weight: bold; font-size: 20px; }
+
+            .content ul { list-style-type: none; margin: 0; padding: 0 0; overflow: hidden; }
+            .content li {  text-align: center;   overflow: hidden;}
+            .content li:nth-child(odd) { background-color: #777; }
+            .content li:nth-child(even) { background-color: #555; }
+            .content li a { display: block; color: white;  padding: 5px 16px; text-decoration: none; font-weight: bold; font-size: 20px;}
+        </style>
+    </head>
     <body>
-        <h1>Misa {{mass.schedule}}</h1>
+        <header>
+            <h1>Registros de misa</h1>
+            <p>{{temple.name}} - {{mass.get_formatted_schedule}}</p>
+        </header>
 
-        <ol>
-            {% for reservation in reservations %}
-                <li>
-                    {{reservation.participant.name}} - {{reservation.participant.id_num}}
-                </li>
-            {% endfor %}
-        </ol>
+        <div class="title">
+            <a class="left_col"> Nombre completo </a> <a class="right_col">Cedula</a>
+        </div>
 
+        <div class="content">
+            <ul>
+                {% for reservation in reservations %}
+                    <li>
+                        <a class="left_col">{{reservation.participant.name}}</a>
+                        <a class="right_col">{{reservation.participant.id_num}}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
     </body>
 </html> 

@@ -1,7 +1,25 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <style>
+            * { box-sizing: border-box; }
+
+            header { text-align: center; }
+
+            form { text-align:center; width: 100%; }
+            label, input { display: inline-block; }
+            label { width: 30%; text-align: right; }
+            label + input { width: 30%; margin: 0 30% 0 1%; }
+
+            input { width: 50%; padding: 6px 6px; margin: 2px 0; border: 3px solid #ccc; transition: 0.5s; }
+            input:focus { border: 3px solid #555; }
+
+        </style>
+    </head>
     <body>
+        <header>
         <h1>Ingresar</h1>
+        </header>
         <form action="/login" method=post>
             <label>Usuario:</label> <input type="text" name="user" required> <br>
             <label>Contraseña:</label> <input type="password" name="pass" required> <br>
