@@ -13,6 +13,8 @@
             nav li a { display: block; color: white; text-align: center; padding: 14px 16px; text-decoration: none; font-weight: bold; }
             nav li a:hover { background-color: #111; }
 
+            h2 { text-align: center; }
+
             .left_col {float: left; width: 70%; }
             .right_col {float: right; width: 30%;}
 
@@ -23,7 +25,7 @@
             .content li {  text-align: center;   overflow: hidden;}
             .content li:nth-child(odd) { background-color: #777; }
             .content li:nth-child(even) { background-color: #555; }
-            .content li a { display: block; color: white;  padding: 5px 16px; text-decoration: none; font-weight: bold; font-size: 20px;}
+            .content li a { display: block; color: white;  padding: 14px 16px; text-decoration: none; font-weight: bold; font-size: 20px;}
         </style>
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,33 +33,24 @@
 
     <body>
         <header>
-            <h1>Registros de misa</h1>
-            <p>{{temple.name}} - {{mass.get_formatted_schedule}}</p>
+            <h1>{{temple.name}}</h1>
+            <p>Historial de misas</p>
         </header>
 
-        <nav>
-            <ul>
-                <li style="float:right"> <a href="/temple">Volver</a> </li>
-            </ul>
-        </nav>
-
         <div class="title">
-            <a class="left_col"> Nombre completo </a> <a class="right_col">Asistio</a>
+            <a class="center_col"> Fecha y hora </a> <a class="right_col">Registros</a>
         </div>
 
         <div class="content">
             <ul>
-                {% for reservation in reservations %}
+                {% for mass in masses %}
                     <li>
-                        <a class="left_col" href="/consult_participant?participant={{reservation.participant.pk}}">{{reservation.participant.name}}</a>
-                        {% if reservation.confirmed %}
-                            <a class="right_col" style="background-color: #77dd77">Si</a>
-                        {% else %}
-                            <a class="right_col" style="background-color: #c23b22">No</a>
-                        {% endif %}
+                        <a class="left_col" href="/consult_mass?mass={{mass.pk}}"> {{mass.get_formatted_schedule}} </a>
+                        <a class="right_col">{{mass.get_space_reserved}}</a>
                     </li>
                 {% endfor %}
             </ul>
         </div>
+
     </body>
 </html> 

@@ -13,6 +13,8 @@
             nav li a { display: block; color: white; text-align: center; padding: 14px 16px; text-decoration: none; font-weight: bold; }
             nav li a:hover { background-color: #111; }
 
+            p { text-align: center; }
+
             .left_col {float: left; width: 70%; }
             .right_col {float: right; width: 30%;}
 
@@ -24,6 +26,8 @@
             .content li:nth-child(odd) { background-color: #777; }
             .content li:nth-child(even) { background-color: #555; }
             .content li a { display: block; color: white;  padding: 5px 16px; text-decoration: none; font-weight: bold; font-size: 20px;}
+
+            h2 { text-align: center; }
         </style>
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,8 +35,7 @@
 
     <body>
         <header>
-            <h1>Registros de misa</h1>
-            <p>{{temple.name}} - {{mass.get_formatted_schedule}}</p>
+            <h1>Informacion participante</h1>
         </header>
 
         <nav>
@@ -41,15 +44,23 @@
             </ul>
         </nav>
 
+        <p>Nombre: {{participant.name}}</p>
+        <p>Cedula: {{participant.id_num}}</p>
+        <p>Edad: {{participant.age}}</p>
+        <p>direccion: {{participant.address}}</p>
+        <p>telefono: {{participant.phone}}</p>
+
+        <h2>Misas Inscritas</h2>
+
         <div class="title">
-            <a class="left_col"> Nombre completo </a> <a class="right_col">Asistio</a>
+            <a class="left_col"> Fecha y hora </a> <a class="right_col">Asistio</a>
         </div>
 
         <div class="content">
             <ul>
                 {% for reservation in reservations %}
                     <li>
-                        <a class="left_col" href="/consult_participant?participant={{reservation.participant.pk}}">{{reservation.participant.name}}</a>
+                        <a class="left_col" href="/consult_mass?mass={{reservation.mass.pk}}"> {{reservation.mass.get_formatted_schedule}} </a>
                         {% if reservation.confirmed %}
                             <a class="right_col" style="background-color: #77dd77">Si</a>
                         {% else %}

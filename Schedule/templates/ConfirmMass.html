@@ -24,6 +24,7 @@
             .content li:nth-child(odd) { background-color: #777; }
             .content li:nth-child(even) { background-color: #555; }
             .content li a { display: block; color: white;  padding: 5px 16px; text-decoration: none; font-weight: bold; font-size: 20px;}
+            .content li input { height: 25px; width: 25px; }
         </style>
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,33 +32,38 @@
 
     <body>
         <header>
-            <h1>Registros de misa</h1>
+            <h1>Confirmar asistencia</h1>
             <p>{{temple.name}} - {{mass.get_formatted_schedule}}</p>
         </header>
 
         <nav>
             <ul>
-                <li style="float:right"> <a href="/temple">Volver</a> </li>
+                <li style="float:right"> <a href="/remove_mass?temple={{temple.pk}}&mass={{mass.pk}}">Eliminar</a> </li>
             </ul>
         </nav>
 
         <div class="title">
-            <a class="left_col"> Nombre completo </a> <a class="right_col">Asistio</a>
+            <a class="left_col">Cedula</a> <a class="right_col">Asistencia</a>
         </div>
 
-        <div class="content">
-            <ul>
-                {% for reservation in reservations %}
-                    <li>
-                        <a class="left_col" href="/consult_participant?participant={{reservation.participant.pk}}">{{reservation.participant.name}}</a>
-                        {% if reservation.confirmed %}
-                            <a class="right_col" style="background-color: #77dd77">Si</a>
-                        {% else %}
-                            <a class="right_col" style="background-color: #c23b22">No</a>
-                        {% endif %}
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
+        <form action="/confirm_mass" method=post>
+            <input type="hidden" name="temple" value="{{temple.pk}}"/>
+            <input type="hidden" name="mass" value="{{mass.pk}}"/>
+            <div class="content">
+                <ul>
+                    {% for reservation in reservations %}
+                        <li>
+                            <a class="left_col">{{reservation.participant.id_num}}</a>
+                            {% if reservation.confirmed %}
+                                <input type="checkbox" name="{{reservation.participant.id_num}}" checked="checked">
+                            {% else %}
+                                <input type="checkbox" name="{{reservation.participant.id_num}}">
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <input style="width: 100%; padding: 6px 6px; margin: 50px 0; border: 3px solid #ccc;" type="submit" value="Confirmar">
+        </form>
     </body>
 </html> 

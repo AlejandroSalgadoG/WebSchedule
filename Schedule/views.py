@@ -74,6 +74,51 @@ class CreateMass(TemplateView):
         models.Mass(temple=temple, schedule=schedule, max_participants=max_participants).save()
         return redirect("/temple")
 
+class MassHistory(TemplateView):
+    template = "MassHistory.html"
+
+    def get(self, request):
+        temple = models.Temple.objects.get(pk=request.GET["temple"])
+        masses = temple.mass_set.all()
+        return render(request, self.template, {"temple": temple, "masses": masses})
+
+class SearchParticipant(TemplateView):
+    template = "SearchParticipant.html"
+
+    def get(self, request):
+        temple = models.Temple.objects.get(pk=request.GET["temple"])
+        return render(request, self.template, {"temple": temple, "participants": []})
+
+    def post(self, request):
+        temple = request.POST["temple"]
+        id_num = request.POST["id_num"]
+        name = request.POST["name"]
+
+        participants = []
+        if id_num and name: participants = models.Participant.objects.filter(id_num__icontains=id_num, name__icontains=name)
+        if id_num: participants = models.Participant.objects.filter(id_num__icontains=id_num)
+        if name: participants = models.Participant.objects.filter(name__icontains=name)
+
+        return render(request, self.template, {"temple": temple, "participants": participants} )
+
+
+class ConfirmMass(TemplateView):
+    template = "ConfirmMass.html"
+
+    def get(self, request):
+        temple = models.Temple.objects.get(pk=request.GET["temple"])
+        mass = models.Mass.objects.get(pk=request.GET["mass"])
+        reservations = mass.reservation_set.all()
+        return render(request, self.template, {"temple": temple, "mass": mass, "reservations": reservations})
+
+    def post(self, request):
+        mass = models.Mass.objects.get(pk=request.POST["mass"])
+        for reservation in models.Reservation.objects.filter(mass=mass):
+            if str(reservation.participant.id_num) in request.POST: reservation.confirmed = True
+            else: reservation.confirmed = False
+            reservation.save()
+        return redirect("/temple")
+
 class RemoveMass(TemplateView):
     template = "RemoveMass.html"
 
@@ -90,10 +135,17 @@ class ConsultMass(TemplateView):
     template = "ConsultMass.html"
 
     def get(self, request):
-        temple = models.Temple.objects.get(pk=request.GET["temple"])
         mass = models.Mass.objects.get(pk=request.GET["mass"])
         reservations = mass.reservation_set.all()
-        return render(request, self.template, {"temple": temple, "mass": mass, "reservations": reservations})
+        return render(request, self.template, {"temple": mass.temple, "mass": mass, "reservations": reservations})
+
+class ConsultParticipant(TemplateView):
+    template = "ConsultParticipant.html"
+
+    def get(self, request):
+        participant = models.Participant.objects.get(pk=request.GET["participant"])
+        reservations = models.Reservation.objects.filter(participant=participant)
+        return render(request, self.template, {"participant": participant, "reservations": reservations})
 
 class SelectMass(TemplateView):
     template = "SelectMass.html"

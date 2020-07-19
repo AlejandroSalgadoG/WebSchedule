@@ -8,12 +8,15 @@
 
             header { text-align: center; }
 
-            nav ul { list-style-type: none; margin: 0; padding: 0; overflow: hidden; background-color: #333; }
-            nav li { float: left; }
-            nav li a { display: block; color: white; text-align: center; padding: 14px 16px; text-decoration: none; font-weight: bold; }
-            nav li a:hover { background-color: #111; }
-
             h2 { text-align: center; }
+
+            form { text-align:center; width: 100%; }
+            label, input { display: inline-block; }
+            label { width: 25%; text-align: right; }
+            label + input { width: 65%; }
+
+            input { width: 90%; padding: 6px 6px; margin: 2px 0; border: 3px solid #ccc; transition: 0.5s; }
+            input:focus { border: 3px solid #555; }
 
             .left_col {float: left; width: 70%; }
             .right_col {float: right; width: 30%;}
@@ -26,6 +29,7 @@
             .content li:nth-child(odd) { background-color: #777; }
             .content li:nth-child(even) { background-color: #555; }
             .content li a { display: block; color: white;  padding: 14px 16px; text-decoration: none; font-weight: bold; font-size: 20px;}
+
         </style>
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,31 +37,29 @@
 
     <body>
         <header>
-            <h1>{{temple.name}}</h1>
+            <h1>Buscar participante</h1>
+            <p>{{temple.name}}</p>
         </header>
 
-        <nav>
-            <ul>
+        <form action="/search_participant" method=post>
+            <input type="hidden" name="temple" value="{{temple.pk}}"/>
+            <label class="name_col">Cedula:</label> <input class="input_col" type="number" name="id_num"> <br>
+            <label>Nombre:</label> <input type="text" name="name"> <br>
+            <input type="submit" value="Buscar">
+        </form> 
 
-                 <li> <a href="/create_mass?temple={{temple.pk}}">Crear misa</a> </li>
-                 <li> <a href="/mass_history?temple={{temple.pk}}">Historial</a> </li>
-                 <li> <a href="/search_participant?temple={{temple.pk}}">Buscar</a> </li>
-                 <li style="float:right"> <a href="/logout">Salir</a> </li>
-            </ul>
-        </nav>
-
-        <h2>Misas programadas</h2>
+        <h2>Resultados</h2>
 
         <div class="title">
-            <a class="center_col"> Fecha y hora </a> <a class="right_col">Registros</a>
+            <a class="center_col"> Nombre </a> <a class="right_col">Cedula</a>
         </div>
 
         <div class="content">
             <ul>
-                {% for mass in masses %}
+                {% for participant in participants %}
                     <li>
-                        <a class="left_col" href="/confirm_mass?temple={{temple.pk}}&mass={{mass.pk}}"> {{mass.get_formatted_schedule}} </a>
-                        <a class="right_col">{{mass.get_space_reserved}}</a>
+                        <a class="left_col" href="/consult_participant?temple={{temple.pk}}&participant={{participant.pk}}"> {{participant.name}} </a>
+                        <a class="right_col">{{participant.id_num}}</a>
                     </li>
                 {% endfor %}
             </ul>

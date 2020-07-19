@@ -32,3 +32,4 @@ class Participant(models.Model):
 class Reservation(models.Model):
     mass = models.ForeignKey(Mass, on_delete=models.CASCADE)
     participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
+    confirmed = models.BooleanField(default=False)
