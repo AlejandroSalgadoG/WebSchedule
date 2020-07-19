@@ -21,6 +21,7 @@
         <h1>Ingresar</h1>
         </header>
         <form action="/login" method=post>
+            <input type="hidden" name="temple" value="{{temple}}"/>
             <label>Usuario:</label> <input type="text" name="user" required> <br>
             <label>Contraseña:</label> <input type="password" name="pass" required> <br>
             <input type="submit" value="Ingresar">

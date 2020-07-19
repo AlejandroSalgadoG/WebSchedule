@@ -6,6 +6,7 @@ from django.views.generic import TemplateView
 from django.contrib.auth import authenticate, login, logout
 
 from Schedule import models
+from django.contrib.auth.models import User
 
 class Index(TemplateView):
     template = "Index.html"
@@ -23,12 +24,30 @@ class Login(TemplateView):
 
     def get(self, request):
         if request.user.is_authenticated: return redirect("/temple")
-        return render(request, self.template, {})
+        return render(request, self.template, {"temple": request.GET["temple"]})
+
+    def find_user(self, username):
+        try:
+            user = models.User.objects.get(username=username)
+            return user
+        except User.DoesNotExist:
+            return None
+
+    def association_exists(self, temple, collaborator):
+        try:
+            models.Collaboration.objects.get(temple=temple, collaborator=collaborator)
+            return True
+        except models.Collaboration.DoesNotExist:
+            return False
 
     def post(self, request):
-        username, password =request.POST["user"], request.POST["pass"]
+        username, password = request.POST["user"], request.POST["pass"]
+        temple = models.Temple.objects.get(pk=request.POST["temple"])
+        user = self.find_user( username )
+        if not user: return redirect("/select_mass?temple=%d" % temple.pk)
+        if not self.association_exists(temple, user): return redirect("/select_mass?temple=%d" % temple.pk)
         user = authenticate(username=username, password=password)
-        if not user: return redirect('/')
+        if not user: return redirect('/select_mass?temple=%d' % temple.pk)
         login(request, user)
         return redirect("/temple")
         
