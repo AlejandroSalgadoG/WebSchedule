@@ -10,4 +10,6 @@ urlpatterns = [
     path('consult_mass', views.ConsultMass.as_view()),
     path('select_mass', views.SelectMass.as_view()),
     path('register', views.Register.as_view()),
+    path('confirmation', views.Confirmation.as_view()),
+    path('full_mass', views.FullMass.as_view()),
 ]

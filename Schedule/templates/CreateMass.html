@@ -4,26 +4,32 @@
         <style>
             * { box-sizing: border-box; }
 
+            body { margin: 0; }
+
             header { text-align: center; }
 
             form { text-align:center; width: 100%; }
             label, input { display: inline-block; }
             label { width: 30%; text-align: right; }
-            label + input { width: 30%; margin: 0 30% 0 1%; }
+            label + input { width: 60%; }
 
-            input { width: 50%; padding: 6px 6px; margin: 2px 0; border: 3px solid #ccc; transition: 0.5s; }
+            input { width: 90%; padding: 6px 6px; margin: 2px 0; border: 3px solid #ccc; transition: 0.5s; }
             input:focus { border: 3px solid #555; }
         </style>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
+
     <body>
         <header>
             <h1>Crear Misa</h1>
+            <p>{{temple.name}}</p>
         </header>
 
         <form action="/create_mass" method=post>
-            <input type="hidden" name="temple" value="{{temple}}"/>
+            <input type="hidden" name="temple" value="{{temple.pk}}"/>
             <label>Horario:</label> <input type="datetime-local" name="schedule" required> <br>
-            <label>Maximo de participantes:</label> <input type="text" name="max_participants" required> <br>
+            <label>Max participantes:</label> <input type="number" name="max_participants" required> <br>
             <input type="submit" value="Crear">
         </form> 
     </body>

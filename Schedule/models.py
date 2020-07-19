@@ -16,8 +16,11 @@ class Mass(models.Model):
     def get_formatted_schedule(self):
         return self.schedule.strftime("%d/%m - %I:%M %p")
 
+    def get_space_reserved(self):
+        return self.reservation_set.all().count()
+
     def get_space_available(self):
-        return "%d/%d" % (len( self.reservation_set.all() ), self.max_participants)
+        return self.max_participants - self.get_space_reserved()
 
 class Participant(models.Model):
     id_num = models.IntegerField()

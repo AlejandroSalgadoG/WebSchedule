@@ -2,12 +2,18 @@
 <html>
     <head>
         <style>
+            body { margin: 0; }
+
             header { text-align: center; }
-            nav ul { list-style-type: none; margin: 0; padding: 0; overflow: hidden; background-color: #333; }
-            nav li { float: left; }
-            nav li a { display: block; color: white; text-align: center; padding: 14px 16px; text-decoration: none; font-weight: bold; }
-            nav li a:hover { background-color: #111; }
+
+            .content ul { list-style-type: none; margin: 0; padding: 0 0; overflow: hidden; }
+            .content li {  text-align: center;   overflow: hidden;}
+            .content li:nth-child(odd) { background-color: #777; }
+            .content li:nth-child(even) { background-color: #555; }
+            .content li a { display: block; color: white;  padding: 14px 16px; text-decoration: none; font-weight: bold; font-size: 20px;}
         </style>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
 
     <body>
@@ -15,7 +21,7 @@
             <h1>Bienvenido</h1>
         </header>
 
-        <nav>
+        <div class="content">
             <ul>
                 {% for temple in temples %}
                     <li>
@@ -23,6 +29,6 @@
                     </li>
                 {% endfor %}
             </ul>
-        </nav>
+        </div>
     </body>
 </html> 
