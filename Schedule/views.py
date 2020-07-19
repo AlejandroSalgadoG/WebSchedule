@@ -74,6 +74,18 @@ class CreateMass(TemplateView):
         models.Mass(temple=temple, schedule=schedule, max_participants=max_participants).save()
         return redirect("/temple")
 
+class RemoveMass(TemplateView):
+    template = "RemoveMass.html"
+
+    def get(self, request):
+        temple = models.Temple.objects.get(pk=request.GET["temple"])
+        mass = models.Mass.objects.get(pk=request.GET["mass"])
+        return render(request, self.template, {"temple": temple, "mass": mass})
+
+    def post(self, request):
+        mass = models.Mass.objects.get(pk=request.POST["mass"]).delete()
+        return redirect("/temple")
+
 class ConsultMass(TemplateView):
     template = "ConsultMass.html"
 
