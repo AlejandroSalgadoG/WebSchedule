@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from django.contrib.auth import authenticate, login, logout
 
-from Schedule import models
+from schedule import models
 from django.contrib.auth.models import User
 
 class Index(TemplateView):

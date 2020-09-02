@@ -1,5 +1,5 @@
 from django.contrib import admin
-from Schedule import models
+from schedule import models
 
 admin.site.register(models.Temple)
 admin.site.register(models.Collaboration)
