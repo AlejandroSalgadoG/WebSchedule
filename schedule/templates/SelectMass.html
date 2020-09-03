@@ -8,6 +8,9 @@
 
             header { text-align: center; }
 
+            nav { text-align: center; overflow: hidden; list-style-type: none; margin: 0; padding: 0; background-color: #333;}
+            nav a { display: block; color: white; text-align: center; padding: 14px 16px; text-decoration: none; font-weight: bold; }
+
             nav ul { list-style-type: none; margin: 0; padding: 0; overflow: hidden; background-color: #333; }
             nav li { float: left; }
             nav li a { display: block; color: white; text-align: center; padding: 14px 16px; text-decoration: none; font-weight: bold; }
@@ -32,24 +35,24 @@
 
     <body>
         <header>
-            <h1>Parroquia {{temple.name}} - {{city.name}}</h1>
+            <h1>{{temple.name}} - {{city.name}}</h1>
         </header>
 
         <nav>
             <ul>
-                <li style="float:right"> <a href="/login?temple={{temple.pk}}">Administrador</a> </li>
+                <li> <a href="/admin_login?temple={{temple.pk}}">Administrador</a> </li>
             </ul>
         </nav>
 
         <div class="title">
-            <a class="left_col"> Fecha y hora </a> <a class="right_col">Cupos disponibles</a>
+          <a class="left_col"> Fecha y hora </a> <a class="right_col">Cupos disponibles</a>
         </div>
 
         <div class="content">
             <ul>
                 {% for mass in masses %}
                     <li>
-                        <a class="left_col" href="/register?city={{city.pk}}&temple={{temple.pk}}&mass={{mass.pk}}"> {{mass.get_formatted_schedule}} </a>
+                        <a class="left_col" href="/confirm_reservation?participant={{participant.pk}}&city={{city.pk}}&temple={{temple.pk}}&mass={{mass.pk}}"> {{mass.get_formatted_schedule}} </a>
                         <a class="right_col">{{mass.get_space_available}}</a>
                     </li>
                 {% endfor %}

@@ -11,6 +11,7 @@
             .content li:nth-child(odd) { background-color: #777; }
             .content li:nth-child(even) { background-color: #555; }
             .content li a { display: block; color: white;  padding: 14px 16px; text-decoration: none; font-weight: bold; font-size: 20px;}
+
         </style>
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,14 +19,14 @@
 
     <body>
         <header>
-            <h1>Seleccione el templo</h1>
+            <h1>Seleccione la ciudad</h1>
         </header>
 
         <div class="content">
             <ul>
-                {% for temple in temples %}
+                {% for city in cities %}
                     <li>
-                        <a href="/select_mass?participant={{participant.pk}}&city={{city.pk}}&temple={{temple.pk}}">{{temple.name}}</a>
+                        <a href="/select_temple?participant={{participant.pk}}&city={{city.pk}}">{{city.name}}</a>
                     </li>
                 {% endfor %}
             </ul>

@@ -2,15 +2,35 @@
 <html>
     <head>
         <style>
+            * { box-sizing: border-box; }
+
             body { margin: 0; }
 
             header { text-align: center; }
+
+            nav ul { list-style-type: none; margin: 0; padding: 0; overflow: hidden; background-color: #333; }
+            nav li { float: left; }
+            nav li a { display: block; color: white; text-align: center; padding: 14px 16px; text-decoration: none; font-weight: bold; }
+            nav li a:hover { background-color: #111; }
+
+            .left_col {float: left; width: 70%; }
+            .right_col {float: right; width: 30%;}
+
+            .title { text-align: center; overflow: hidden; padding: 20px;}
+            .title a { font-weight: bold; font-size: 20px; }
 
             .content ul { list-style-type: none; margin: 0; padding: 0 0; overflow: hidden; }
             .content li {  text-align: center;   overflow: hidden;}
             .content li:nth-child(odd) { background-color: #777; }
             .content li:nth-child(even) { background-color: #555; }
             .content li a { display: block; color: white;  padding: 14px 16px; text-decoration: none; font-weight: bold; font-size: 20px;}
+            form { text-align:center; width: 100%; }
+            label, input { display: inline-block; }
+            label { width: 25%; text-align: right; }
+            label + input { width: 65%; }
+
+            input { width: 90%; padding: 6px 6px; margin: 2px 0; border: 3px solid #ccc; transition: 0.5s; }
+            input:focus { border: 3px solid #555; }
         </style>
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,14 +41,18 @@
             <h1>Bienvenido</h1>
         </header>
 
-        <div class="content">
+        <nav>
             <ul>
-                {% for city in cities %}
-                    <li>
-                        <a href="/select_temple?city={{city.pk}}">{{city.name}}</a>
-                    </li>
-                {% endfor %}
+                <li> <a href="/register">Registrarse</a> </li>
             </ul>
-        </div>
+        </nav>
+
+        <h2 style="text-align: center;">Ingresar</h2>
+
+        <form action="/login" method=post>
+            <label>Cedula:</label> <input type="number" name="id_num" required> <br>
+            <input type="submit" value="Ingresar">
+        </form> 
+
     </body>
 </html> 

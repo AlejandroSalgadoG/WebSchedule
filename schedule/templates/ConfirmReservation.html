@@ -23,19 +23,20 @@
 
     <body>
         <header>
-            <h1>Registrarse</h1>
+            <h1>Confirmar reserva</h1>
         </header>
 
-        <form action="/register" method=post>
+        <form action="/confirm_reservation" method=post>
+            <input type="hidden" name="participant" value="{{participant.pk}}"/>
             <input type="hidden" name="city" value="{{city.pk}}"/>
             <input type="hidden" name="temple" value="{{temple.pk}}"/>
             <input type="hidden" name="mass" value="{{mass.pk}}"/>
-            <label class="name_col">Cedula:</label> <input class="input_col" type="number" name="id_num" required> <br>
-            <label>Nombre completo:</label> <input type="text" name="name" required> <br>
-            <label>Edad:</label> <input type="number" name="age" required> <br>
-            <label>Direccion:</label> <input type="text" name="address" required> <br>
-            <label>Telefono:</label> <input type="number" name="phone" required> <br>
-            <input type="submit" value="Registrarse">
+            <label>CC:</label> <input class="input_col" value="{{participant.id_num}}" readonly> <br>
+            <label>Nombre:</label> <input class="input_col" name="name" value="{{participant.name}}" readonly> <br>
+            <label>Ciudad:</label> <input class="input_col" value="{{city.name}}" readonly> <br>
+            <label>Templo:</label> <input class="input_col" value="{{temple.name}}" readonly> <br>
+            <label>Misa:</label> <input class="input_col" value="{{mass.get_formatted_schedule}}" readonly> <br>
+            <input type="submit" value="Confirmar">
         </form> 
 
     </body>

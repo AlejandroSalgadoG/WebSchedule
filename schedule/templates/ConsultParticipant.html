@@ -28,6 +28,14 @@
             .content li a { display: block; color: white;  padding: 5px 16px; text-decoration: none; font-weight: bold; font-size: 20px;}
 
             h2 { text-align: center; }
+
+            form { text-align:center; width: 100%; }
+            label, input { display: inline-block; }
+            label { width: 25%; text-align: right; }
+            label + input { width: 65%; }
+
+            input { width: 90%; padding: 6px 6px; margin: 2px 0; border: 3px solid #ccc; transition: 0.5s; }
+            input:focus { border: 3px solid #555; }
         </style>
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -44,11 +52,18 @@
             </ul>
         </nav>
 
-        <p>Nombre: {{participant.name}}</p>
-        <p>Cedula: {{participant.id_num}}</p>
-        <p>Edad: {{participant.age}}</p>
-        <p>Direccion: {{participant.address}}</p>
-        <p>Telefono: {{participant.phone}}</p>
+        <br>
+
+        <form action="/modify_participant" method=post>
+          <input type="hidden" name="temple" value="{{temple.pk}}"/>
+          <input type="hidden" name="participant" value="{{participant.pk}}"/>
+          <label class="name_col">Cedula:</label> <input class="input_col" type="number" name="id_num" value="{{participant.id_num}}" readonly> <br>
+          <label class="name_col">Nombre:</label> <input class="input_col" type="text" name="name" value="{{participant.name}}" required> <br>
+          <label class="name_col">Edad:</label> <input class="input_col" type="number" name="age" value="{{participant.age}}" required> <br>
+          <label class="name_col">Direccion:</label> <input class="input_col" type="text" name="address" value="{{participant.address}}" required> <br>
+          <label class="name_col">Telefono:</label> <input class="input_col" type="number" name="phone" value="{{participant.phone}}" required> <br>
+          <input type="submit" value="Modificar">
+        </form>
 
         <h2>Misas Inscritas</h2>
 
