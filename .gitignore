@@ -4,6 +4,8 @@ db.sqlite3
 migrations/
 node_modules/
 package-lock.json
+package.json
+secrets.json
 
 
 # Distribution / packaging

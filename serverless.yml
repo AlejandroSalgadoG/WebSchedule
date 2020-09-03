@@ -5,8 +5,9 @@ frameworkVersion: ">=1.0.0"
 plugins:
   - serverless-python-requirements
   - serverless-wsgi
-
+  - serverless-domain-manager
 custom:
+  secrets: ${file(secrets.json)}
   pythonRequirements:
     pythonBin: /home/alejandro/.anaconda3/envs/django/bin/python3.8
     useDownloadCache: true
@@ -28,6 +29,14 @@ custom:
   wsgi:
     app: webschedule.wsgi.application
     packRequirements: false
+  customDomain:
+    domainName: reservarmisa.com
+    basePath: ''
+    stage: ${self:provider.stage}
+    createRoute53Record: true
+    endpointType: 'edge'
+    securityPolicy: tls_1_2
+    apiType: rest
 
 provider:
   name: aws
@@ -40,11 +49,19 @@ provider:
       - '/'
   environment:
     APP_STORAGE: '/tmp'
+    SCHEDULEDB_NAME: ${self:custom.secrets.SCHEDULEDB_NAME}
+    SCHEDULEDB_USER: ${self:custom.secrets.SCHEDULEDB_USER}
+    SCHEDULEDB_PASS: ${self:custom.secrets.SCHEDULEDB_PASS}
+    SCHEDULEDB_HOST: ${self:custom.secrets.SCHEDULEDB_HOST}
+    SCHEDULEDB_PORT: ${self:custom.secrets.SCHEDULEDB_PORT}
 
 package:
   exclude:
     - node_modules/**
     - README.md
+    - db.sqlite3
+    - Dockerfile
+    - secrets.json
 
 functions:
   website:

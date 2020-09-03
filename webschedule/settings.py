@@ -76,9 +76,13 @@ WSGI_APPLICATION = 'webschedule.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ["SCHEDULEDB_NAME"],
+        'USER': os.environ["SCHEDULEDB_USER"],
+        'PASSWORD': os.environ["SCHEDULEDB_PASS"],
+        'HOST': os.environ["SCHEDULEDB_HOST"],
+        'PORT': os.environ["SCHEDULEDB_PORT"],
+    } 
 }
 
 
