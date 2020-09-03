@@ -296,6 +296,8 @@ class ModifyParticipant(TemplateView):
         logout(request)
         return redirect("/")
 
+    @login_required
+    @collaboration_required
     def post(self, request):
         temple = models.Temple.objects.get(pk=request.POST["temple"])
         participant = models.Participant.objects.get(pk=request.POST["participant"])
@@ -305,3 +307,20 @@ class ModifyParticipant(TemplateView):
         participant.phone = request.POST["phone"]
         participant.save()
         return redirect('/consult_participant?temple=%d&participant=%d' % (temple.pk, participant.pk) )
+
+class DeleteParticipant(TemplateView):
+    template = "DeleteParticipant.html"
+
+    @login_required
+    @collaboration_required
+    def get(self, request):
+        temple = models.Temple.objects.get(pk=request.GET["temple"])
+        participant = models.Participant.objects.get(pk=request.GET["participant"])
+        return render(request, self.template, {"temple": temple, "participant": participant})
+
+    @login_required
+    @collaboration_required
+    def post(self, request):
+        temple = models.Temple.objects.get(pk=request.POST["temple"])
+        models.Participant.objects.get(pk=request.POST["participant"]).delete()
+        return redirect('/temple?temple=%d' % temple.pk )
