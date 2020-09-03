@@ -24,10 +24,11 @@
     <body>
         <header>
             <h1>Registro</h1>
-            <p>{{temple.name}} - {{mass.get_formatted_schedule}}</p>
+            <p>{{temple.name}} - {{city.name}} - {{mass.get_formatted_schedule}}</p>
         </header>
 
         <form action="/register" method=post>
+            <input type="hidden" name="city" value="{{city.pk}}"/>
             <input type="hidden" name="temple" value="{{temple.pk}}"/>
             <input type="hidden" name="mass" value="{{mass.pk}}"/>
             <label class="name_col">Cedula:</label> <input class="input_col" type="number" name="id_num" required> <br>

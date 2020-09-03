@@ -1,11 +1,17 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class Temple(models.Model):
+from schedule.utilities import as_local_time
+
+class City(models.Model):
     name = models.CharField(max_length = 64)
 
+class Temple(models.Model):
+    name = models.CharField(max_length = 64)
+    city = models.ForeignKey(City, on_delete=models.CASCADE)
+
 class Collaboration(models.Model):
-    collaborator = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    collaborator = models.ForeignKey(User, on_delete=models.CASCADE)
     temple = models.ForeignKey(Temple, on_delete=models.DO_NOTHING)
 
 class Mass(models.Model):
@@ -14,7 +20,7 @@ class Mass(models.Model):
     max_participants = models.IntegerField()
 
     def get_formatted_schedule(self):
-        return self.schedule.strftime("%d/%m - %I:%M %p")
+        return as_local_time(self.schedule).strftime("%d/%m - %I:%M %p") 
 
     def get_space_reserved(self):
         return self.reservation_set.all().count()

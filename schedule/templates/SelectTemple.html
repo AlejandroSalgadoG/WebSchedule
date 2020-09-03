@@ -18,14 +18,14 @@
 
     <body>
         <header>
-            <h1>Bienvenido</h1>
+            <h1>Seleccione el templo</h1>
         </header>
 
         <div class="content">
             <ul>
-                {% for city in cities %}
+                {% for temple in temples %}
                     <li>
-                        <a href="/select_temple?city={{city.pk}}">{{city.name}}</a>
+                        <a href="/select_mass?city={{city.pk}}&temple={{temple.pk}}">{{temple.name}}</a>
                     </li>
                 {% endfor %}
             </ul>

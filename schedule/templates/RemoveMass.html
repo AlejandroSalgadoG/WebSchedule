@@ -27,6 +27,7 @@
         </header>
 
         <form action="/remove_mass" method=post>
+            <input type="hidden" name="temple" value="{{temple.pk}}"/>
             <input type="hidden" name="mass" value="{{mass.pk}}"/>
             <input type="submit" value="Eliminar">
         </form> 

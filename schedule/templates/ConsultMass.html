@@ -37,7 +37,7 @@
 
         <nav>
             <ul>
-                <li style="float:right"> <a href="/temple">Volver</a> </li>
+                <li style="float:right"> <a href="/temple?temple={{temple.pk}}">Volver</a> </li>
             </ul>
         </nav>
 
@@ -49,7 +49,7 @@
             <ul>
                 {% for reservation in reservations %}
                     <li>
-                        <a class="left_col" href="/consult_participant?participant={{reservation.participant.pk}}">{{reservation.participant.name}}</a>
+                        <a class="left_col" href="/consult_participant?temple={{temple.pk}}&participant={{reservation.participant.pk}}">{{reservation.participant.name}}</a>
                         {% if reservation.confirmed %}
                             <a class="right_col" style="background-color: #77dd77">Si</a>
                         {% else %}

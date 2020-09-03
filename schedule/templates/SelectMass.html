@@ -32,7 +32,7 @@
 
     <body>
         <header>
-            <h1>Parroquia {{temple.name}}</h1>
+            <h1>Parroquia {{temple.name}} - {{city.name}}</h1>
         </header>
 
         <nav>
@@ -49,7 +49,7 @@
             <ul>
                 {% for mass in masses %}
                     <li>
-                        <a class="left_col" href="/register?temple={{temple.pk}}&mass={{mass.pk}}"> {{mass.get_formatted_schedule}} </a>
+                        <a class="left_col" href="/register?city={{city.pk}}&temple={{temple.pk}}&mass={{mass.pk}}"> {{mass.get_formatted_schedule}} </a>
                         <a class="right_col">{{mass.get_space_available}}</a>
                     </li>
                 {% endfor %}

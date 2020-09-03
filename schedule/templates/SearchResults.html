@@ -37,15 +37,24 @@
 
     <body>
         <header>
-            <h1>Buscar participante</h1>
+            <h1>Resultados de la busqueda</h1>
             <p>{{temple.name}}</p>
         </header>
 
-        <form action="/search_participant" method=post>
-            <input type="hidden" name="temple" value="{{temple.pk}}"/>
-            <label class="name_col">Cedula:</label> <input class="input_col" type="number" name="id_num"> <br>
-            <label>Nombre:</label> <input type="text" name="name"> <br>
-            <input type="submit" value="Buscar">
-        </form> 
+        <div class="title">
+            <a class="center_col"> Nombre </a> <a class="right_col">Cedula</a>
+        </div>
+
+        <div class="content">
+            <ul>
+                {% for participant in participants %}
+                    <li>
+                        <a class="left_col" href="/consult_participant?temple={{temple.pk}}&participant={{participant.pk}}"> {{participant.name}} </a>
+                        <a class="right_col">{{participant.id_num}}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
     </body>
 </html> 

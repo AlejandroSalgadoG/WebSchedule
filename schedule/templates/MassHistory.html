@@ -45,7 +45,7 @@
             <ul>
                 {% for mass in masses %}
                     <li>
-                        <a class="left_col" href="/consult_mass?mass={{mass.pk}}"> {{mass.get_formatted_schedule}} </a>
+                        <a class="left_col" href="/consult_mass?temple={{temple.pk}}&mass={{mass.pk}}"> {{mass.get_formatted_schedule}} </a>
                         <a class="right_col">{{mass.get_space_reserved}}</a>
                     </li>
                 {% endfor %}
