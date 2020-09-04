@@ -22,6 +22,8 @@ urlpatterns = [
     path('consult_mass', views.ConsultMass.as_view()),
     path('consult_participant', views.ConsultParticipant.as_view()),
     path('modify_participant', views.ModifyParticipant.as_view()),
+    path('delete_participant', views.DeleteParticipant.as_view()),
     path('confirm_mass', views.ConfirmMass.as_view()),
     path('remove_mass', views.RemoveMass.as_view()),
+    path('privacy_policy', views.PrivacyPolicy.as_view()),
 ]

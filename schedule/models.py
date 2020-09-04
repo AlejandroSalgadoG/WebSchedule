@@ -29,11 +29,11 @@ class Mass(models.Model):
         return self.max_participants - self.get_space_reserved()
 
 class Participant(models.Model):
-    id_num = models.IntegerField()
+    id_num = models.CharField(max_length=16)
     name = models.CharField(max_length = 128)
     age = models.IntegerField()
     address = models.CharField(max_length = 128)
-    phone = models.IntegerField()
+    phone = models.CharField(max_length=16)
 
 class Reservation(models.Model):
     mass = models.ForeignKey(Mass, on_delete=models.CASCADE)
