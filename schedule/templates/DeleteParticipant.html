@@ -51,11 +51,11 @@
         <form action="/delete_participant" method=post>
           <input type="hidden" name="temple" value="{{temple.pk}}"/>
           <input type="hidden" name="participant" value="{{participant.pk}}"/>
-          <label class="name_col">Cedula:</label> <input class="input_col" type="number" name="id_num" value="{{participant.id_num}}" readonly> <br>
+          <label class="name_col">Cédula:</label> <input class="input_col" type="number" name="id_num" value="{{participant.id_num}}" readonly> <br>
           <label class="name_col">Nombre:</label> <input class="input_col" type="text" name="name" value="{{participant.name}}" readonly> <br>
           <label class="name_col">Edad:</label> <input class="input_col" type="number" name="age" value="{{participant.age}}" readonly> <br>
-          <label class="name_col">Direccion:</label> <input class="input_col" type="text" name="address" value="{{participant.address}}" readonly> <br>
-          <label class="name_col">Telefono:</label> <input class="input_col" type="number" name="phone" value="{{participant.phone}}" readonly> <br>
+          <label class="name_col">Dirección:</label> <input class="input_col" type="text" name="address" value="{{participant.address}}" readonly> <br>
+          <label class="name_col">Teléfono:</label> <input class="input_col" type="number" name="phone" value="{{participant.phone}}" readonly> <br>
           <input type="submit" value="Confirmar">
         </form>
 

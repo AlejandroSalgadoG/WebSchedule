@@ -25,4 +25,5 @@ urlpatterns = [
     path('delete_participant', views.DeleteParticipant.as_view()),
     path('confirm_mass', views.ConfirmMass.as_view()),
     path('remove_mass', views.RemoveMass.as_view()),
+    path('privacy_policy', views.PrivacyPolicy.as_view()),
 ]

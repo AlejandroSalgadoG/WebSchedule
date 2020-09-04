@@ -241,7 +241,7 @@ class ConfirmMass(TemplateView):
             if str(reservation.participant.id_num) in request.POST: reservation.confirmed = True
             else: reservation.confirmed = False
             reservation.save()
-        return redirect("/temple")
+        return redirect("/temple?temple=" + request.POST["temple"])
 
 class RemoveMass(TemplateView):
     template = "RemoveMass.html"
@@ -301,6 +301,12 @@ class ModifyParticipant(TemplateView):
     def post(self, request):
         temple = models.Temple.objects.get(pk=request.POST["temple"])
         participant = models.Participant.objects.get(pk=request.POST["participant"])
+
+        reservations = models.Reservation.objects.filter(participant=participant, mass__in=temple.mass_set.all())
+        if not reservations:
+            logout(request)
+            return redirect("/")
+
         participant.name = request.POST["name"]
         participant.age = request.POST["age"]
         participant.address = request.POST["address"]
@@ -316,11 +322,30 @@ class DeleteParticipant(TemplateView):
     def get(self, request):
         temple = models.Temple.objects.get(pk=request.GET["temple"])
         participant = models.Participant.objects.get(pk=request.GET["participant"])
+
+        reservations = models.Reservation.objects.filter(participant=participant, mass__in=temple.mass_set.all())
+        if not reservations:
+            logout(request)
+            return redirect("/")
+
         return render(request, self.template, {"temple": temple, "participant": participant})
 
     @login_required
     @collaboration_required
     def post(self, request):
         temple = models.Temple.objects.get(pk=request.POST["temple"])
-        models.Participant.objects.get(pk=request.POST["participant"]).delete()
+        participant = models.Participant.objects.get(pk=request.POST["participant"])
+
+        reservations = models.Reservation.objects.filter(participant=participant, mass__in=temple.mass_set.all())
+        if not reservations:
+            logout(request)
+            return redirect("/")
+
+        participant.delete()
         return redirect('/temple?temple=%d' % temple.pk )
+
+class PrivacyPolicy(TemplateView):
+    template = "PrivacyPolicy.html"
+
+    def get(self, request):
+        return render(request, self.template, {})
