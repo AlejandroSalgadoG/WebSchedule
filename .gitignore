@@ -28,3 +28,7 @@ var/
 
 # Serverless directories
 .serverless
+
+.serverless-wsgi
+serverless_wsgi.py
+wsgi_handler.py
