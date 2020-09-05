@@ -13,7 +13,7 @@ from schedule import models
 from schedule.utilities import to_local_time
 from schedule.decorators import login_required, collaboration_required
 
-def fatal_error(request):
+def fatal_error(request, exception=None):
     return render(request, "FatalError.html", {})
 
 class Index(TemplateView):
