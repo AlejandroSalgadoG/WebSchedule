@@ -10,6 +10,9 @@ class Temple(models.Model):
     name = models.CharField(max_length = 64)
     city = models.ForeignKey(City, on_delete=models.CASCADE)
 
+    def get_participants(self):
+        return Reservation.objects.filter(mass__in=self.mass_set.all()).values_list("participant", flat=True)
+
 class Collaboration(models.Model):
     collaborator = models.ForeignKey(User, on_delete=models.CASCADE)
     temple = models.ForeignKey(Temple, on_delete=models.DO_NOTHING)
@@ -34,6 +37,13 @@ class Participant(models.Model):
     age = models.IntegerField()
     address = models.CharField(max_length = 128)
     phone = models.CharField(max_length=16)
+
+    def get_temples(self):
+        masses = Reservation.objects.filter(participant=self).values_list("mass", flat=True)
+        return Mass.objects.filter(pk__in=masses).values_list("temple", flat=True)
+
+    def get_temple_reservations(self, temple):
+        return Reservation.objects.filter(participant=self, mass__in=temple.mass_set.all())
 
 class Reservation(models.Model):
     mass = models.ForeignKey(Mass, on_delete=models.CASCADE)
