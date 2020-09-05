@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'wts+f8zrix=g%mw4!u_-gdv9o+w^6!x&r8d#m=t)h!=uaf-b=j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -74,17 +74,12 @@ WSGI_APPLICATION = 'webschedule.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ["SCHEDULEDB_NAME"],
-        'USER': os.environ["SCHEDULEDB_USER"],
-        'PASSWORD': os.environ["SCHEDULEDB_PASS"],
-        'HOST': os.environ["SCHEDULEDB_HOST"],
-        'PORT': os.environ["SCHEDULEDB_PORT"],
-    } 
-}
-
+DATABASES = {                                                                    
+    'default': {                                                                 
+        'ENGINE': 'django.db.backends.sqlite3',                                  
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),                            
+    }                                                                            
+}    
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

@@ -22,6 +22,6 @@ handler403 = 'schedule.views.fatal_error'
 handler500 = 'schedule.views.fatal_error'
 
 urlpatterns = [
-    #path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('', include('schedule.urls')),
 ]
