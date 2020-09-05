@@ -39,9 +39,9 @@
         <nav>
             <ul>
 
-                 <li> <a href="/create_mass?temple={{temple.pk}}">Crear misa</a> </li>
+                 <li> <a href="/ask_create_mass?temple={{temple.pk}}">Crear misa</a> </li>
                  <li> <a href="/mass_history?temple={{temple.pk}}">Historial</a> </li>
-                 <li> <a href="/search_participant?temple={{temple.pk}}">Buscar</a> </li>
+                 <li> <a href="/ask_search_participant?temple={{temple.pk}}">Buscar</a> </li>
                  <li style="float:right"> <a href="/logout">Salir</a> </li>
             </ul>
         </nav>
@@ -56,7 +56,7 @@
             <ul>
                 {% for mass in masses %}
                     <li>
-                        <a class="left_col" href="/confirm_mass?temple={{temple.pk}}&mass={{mass.pk}}"> {{mass.get_formatted_schedule}} </a>
+                        <a class="left_col" href="/ask_confirm_mass?temple={{temple.pk}}&mass={{mass.pk}}"> {{mass.get_formatted_schedule}} </a>
                         <a class="right_col">{{mass.get_space_reserved}}</a>
                     </li>
                 {% endfor %}
