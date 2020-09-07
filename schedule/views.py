@@ -85,7 +85,7 @@ def perform_reservation(request):
     if created: return redirect('/confirmation?participant=%d&city=%s&temple=%d&mass=%d' % (participant.pk, city_pk, temple_pk, mass.pk))
     return redirect('/already_inscribed?participant=%d&city=%s&temple=%d&mass=%d' % (participant.pk, city_pk, temple_pk, mass.pk))
 
-def confirmation(self, request):
+def confirmation(request):
     city = models.City.objects.get(pk=request.GET["city"])
     temple = models.Temple.objects.get(pk=request.GET["temple"])
     mass = models.Mass.objects.get(pk=request.GET["mass"])
