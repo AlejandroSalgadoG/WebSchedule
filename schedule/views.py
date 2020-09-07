@@ -221,6 +221,14 @@ def ask_confirm_mass(request):
 
 @login_required
 @collaboration_required
+def filter_participants(request):
+    temple = models.Temple.objects.get(pk=request.POST["temple"])
+    mass = models.Mass.objects.get(pk=request.POST["mass"])
+    reservations = mass.reservation_set.filter(participant__id_num__startswith=request.POST["id_num"])
+    return render(request, "ConfirmMass.html", {"temple": temple, "mass": mass, "reservations": reservations})
+
+@login_required
+@collaboration_required
 def confirm_mass(request):
     mass = models.Mass.objects.get(pk=request.POST["mass"])
     for reservation in models.Reservation.objects.filter(mass=mass):

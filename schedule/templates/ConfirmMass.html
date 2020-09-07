@@ -25,6 +25,14 @@
             .content li:nth-child(even) { background-color: #555; }
             .content li a { display: block; color: white;  padding: 5px 16px; text-decoration: none; font-weight: bold; font-size: 20px;}
             .content li input { height: 25px; width: 25px; }
+
+            form { text-align:center; width: 100%; }
+            label, input { display: inline-block; }
+            label { width: 25%; text-align: right; }
+            label + input { width: 65%; }
+
+            input { width: 90%; padding: 6px 6px; margin: 2px 0; border: 3px solid #ccc; transition: 0.5s; }
+            input:focus { border: 3px solid #555; }
         </style>
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,6 +49,15 @@
                 <li style="float:right"> <a href="/ask_remove_mass?temple={{temple.pk}}&mass={{mass.pk}}">Eliminar</a> </li>
             </ul>
         </nav>
+
+        <br>
+
+        <form action="/filter_participants" method=post>
+            <input type="hidden" name="temple" value="{{temple.pk}}"/>
+            <input type="hidden" name="mass" value="{{mass.pk}}"/>
+            <label>Cédula:</label> <input type="number" name="id_num" required> <br>
+            <input type="submit" value="Buscar">
+        </form> 
 
         <div class="title">
             <a class="left_col">Cédula</a> <a class="right_col">Asistencia</a>
