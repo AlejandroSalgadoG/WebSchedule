@@ -31,6 +31,7 @@ urlpatterns = [
     path('ask_delete_participant', views.ask_delete_participant),
     path('delete_participant', views.delete_participant),
     path('ask_confirm_mass', views.ask_confirm_mass),
+    path('filter_participants', views.filter_participants),
     path('confirm_mass', views.confirm_mass),
     path('ask_remove_mass', views.ask_remove_mass),
     path('remove_mass', views.remove_mass),
