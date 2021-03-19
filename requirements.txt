@@ -10,7 +10,7 @@ idna==2.10
 numpy==1.19.0
 olefile==0.46
 pandas==1.0.5
-pillow==7.2.0
+pillow==8.1.1
 psycopg2-binary==2.8.5
 pypdf2==1.26.0
 python-dateutil==2.8.1
