@@ -4,7 +4,7 @@ chardet==3.0.4
 django==3.0.8
 django-cors-headers==3.4.0
 django-model-utils==4.0.0
-djangorestframework==3.11.0
+djangorestframework==3.11.2
 html5lib==1.1
 idna==2.10
 numpy==1.19.0
